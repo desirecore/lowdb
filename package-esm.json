@@ -1,6 +1,6 @@
 {
-  "name": "@desirecore/lowdb",
-  "version": "7.0.2",
+  "name": "lowdb",
+  "version": "7.0.1",
   "description": "Tiny local JSON database for Node, Electron and the browser",
   "keywords": [
     "database",
@@ -27,41 +27,28 @@
   "funding": "https://github.com/sponsors/typicode",
   "license": "MIT",
   "author": "Typicode <typicode@gmail.com>",
-  "main": "./commonjs/index.js",
+  "type": "module",
   "exports": {
-    ".": "./commonjs/index.js",
-    "./node": "./commonjs/node.js",
-    "./browser": "./commonjs/browser.js"
+    ".": "./lib/index.js",
+    "./node": "./lib/node.js",
+    "./browser": "./lib/browser.js"
   },
   "types": "./lib",
   "typesVersions": {
     "*": {
-      "node": [
-        "lib/node.d.ts"
-      ],
-      "browser": [
-        "lib/browser.d.ts"
-      ]
+      "node": ["lib/node.d.ts"],
+      "browser": ["lib/browser.d.ts"]
     }
   },
-  "files": [
-    "commonjs",
-    "lib",
-    "!commonjs/examples/**/*",
-    "!lib/examples/**/*",
-    "!commonjs/**/*.test.*",
-    "!lib/**/*.test.*"
-  ],
+  "files": ["lib", "!lib/examples/**/*", "!lib/**/*.test.*"],
   "scripts": {
     "test": "node --import tsx/esm --test src/**/*.test.ts src/**/**/*.test.ts",
     "lint": "eslint src --ext .ts --ignore-path .gitignore",
     "build": "del-cli lib && tsc",
+    "prepublishOnly": "npm run build",
     "postversion": "git push --follow-tags && npm publish",
     "prepare": "husky install",
     "esm2commonjs": "babel lib --out-dir commonjs"
-  },
-  "dependencies": {
-    "@desirecore/steno": "4.0.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.26.4",
@@ -88,5 +75,8 @@
   "engines": {
     "node": ">=18"
   },
-  "packageManager": "pnpm@9.15.2+sha512.93e57b0126f0df74ce6bff29680394c0ba54ec47246b9cf321f0121d8d9bb03f750a705f24edc3c1180853afd7c2c3b94196d0a3d53d3e069d9e2793ef11f321"
+  "packageManager": "pnpm@9.15.2+sha512.93e57b0126f0df74ce6bff29680394c0ba54ec47246b9cf321f0121d8d9bb03f750a705f24edc3c1180853afd7c2c3b94196d0a3d53d3e069d9e2793ef11f321",
+  "dependencies": {
+    "@desirecore/steno": "4.0.2"
+  }
 }
